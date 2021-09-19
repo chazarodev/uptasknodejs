@@ -24,7 +24,7 @@ const Proyectos = db.define('proyectos', {
         beforeCreate(proyecto) {
             const url = slug(proyecto.nombre).toLowerCase();
             proyecto.url = `${url}-${shortid.generate()}`
-        }
+        },
     }
 });
 

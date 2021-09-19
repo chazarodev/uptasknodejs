@@ -22,6 +22,13 @@ module.exports = function() {
     //Listar proyecto
     router.get('/proyectos/:url', proyectosController.proyectoPorUrl); //comodin :url lo pasamos a proyectosController.js
 
+    //Actualizar el proyecto
+    router.get('/proyecto/editar/:id', proyectosController.formularioEditar);
+    router.post('/nuevo-proyecto/:id', 
+        body('nombre').not().isEmpty().trim().escape(),
+        proyectosController.actualizarProyecto
+    );
+
     return router;
 
     //Nota: app.use es reemplazado por router.verbo

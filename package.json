@@ -1,0 +1,35 @@
+{
+  "name": "uptasknodejs",
+  "version": "1.0.0",
+  "description": "Proyecto Uptask con Node y MVC",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/chazarodev/uptasknodejs.git"
+  },
+  "keywords": [
+    "nodejs",
+    "MVC"
+  ],
+  "author": "Alberto Cházaro Romero",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/chazarodev/uptasknodejs/issues"
+  },
+  "homepage": "https://github.com/chazarodev/uptasknodejs#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-validator": "^6.12.1",
+    "mysql2": "^2.3.0",
+    "pug": "^3.0.2",
+    "sequelize": "^6.6.5",
+    "shortid": "^2.2.16",
+    "slug": "^5.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}

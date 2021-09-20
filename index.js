@@ -11,6 +11,7 @@ const db = require('./config/db');
 
 //Importar el modelo
 require('./models/Proyectos');
+require('./models/Tareas');
 
 db.sync() //Nota: authenticate conecta a la bd, mientras que sync, genera las tablas en la base de datos
     .then(() => console.log('Conectado al servidor'))

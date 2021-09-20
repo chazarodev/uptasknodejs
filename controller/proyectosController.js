@@ -1,5 +1,6 @@
 //importar el modelo 
 const Proyectos = require('../models/Proyectos');
+const Tareas = require('../models/Tareas');
 
 //Este código del controlador es lo que se pasa como segundo parametro en el archivo de rutas
 exports.proyectosHome = async (req, res) => {
@@ -49,15 +50,24 @@ exports.nuevoProyecto = async (req, res) => {
     }
 }
 
-
-//Nota: Código utilizadno async await
 exports.proyectoPorUrl = async (req, res, next) => {
-    const proyectos = await Proyectos.findAll();
+    const proyectosPromise = Proyectos.findAll();
     // res.send(req.params.url) //url corresponde al comodin de la ruta del metodo get en index.js
-    const proyecto = await Proyectos.findOne({
+    const proyectoPromise = Proyectos.findOne({
         where: {
             url: req.params.url
         }
+    });
+    const [proyectos, proyecto] = await Promise.all([proyectosPromise, proyectoPromise]);
+
+    //Consultar tareas del proyecto actual
+    const tareas = await Tareas.findAll({
+        where: {
+            proyectoId: proyecto.id
+        },
+        // include: [
+        //     {model: Proyectos}
+        // ] Similar a un join en sql.
     });
 
     if (!proyecto) {
@@ -68,7 +78,8 @@ exports.proyectoPorUrl = async (req, res, next) => {
     res.render('tareas', {
         nombrePagina: 'Tareas del Proyecto',
         proyecto,
-        proyectos
+        proyectos,
+        tareas
     });
 }
 
@@ -124,4 +135,18 @@ exports.actualizarProyecto = async (req, res) => {
         );
         res.redirect('/');
     }
+}
+
+exports.eliminarProyecto = async (req, res, next) => {
+    //req, query o params para visualizar los datos que se envían al servidor
+    // console.log(req.query);
+    const {urlProyecto} = req.query;
+
+    const resultado = await Proyectos.destroy({where: {url: urlProyecto}});
+
+    if (!resultado) {
+        return next();
+    }
+
+    res.status(200).send('El proyecto ha sido eliminado');
 }

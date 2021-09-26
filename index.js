@@ -58,8 +58,10 @@ app.use(passport.session());
 
 //Pasar var dump a la aplicación
 app.use((req, res, next) => {
+    // console.log(req.user);
     res.locals.vardump = helpers.vardump; //Nota: esto nos ayuda a crear variables y consumirlas en cualquier otro archivo del proyecto
     res.locals.mensajes = req.flash();
+    res.locals.usuario = {...req.user} || null;
     next(); //Next ejecuta el siguiente middleware
 })
 

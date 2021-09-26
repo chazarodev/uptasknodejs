@@ -33,7 +33,7 @@ exports.cerrarSesion = (req, res) => {
 }
 
 //Genera un token si el usuario es valido
-exports.enviarToken = async (req, res) => {
+exports.enviarToken = async (req, res,) => {
     //Verificar que el usuario existe
     const {email} = req.body;
     const usuario = await Usuarios.findOne({where: {email}});
@@ -57,7 +57,7 @@ exports.enviarToken = async (req, res) => {
     const resetUrl = `http://${req.headers.host}/reestablecer/${usuario.token}`;
 
     //Enviar el correo con el token
-    await enviarEmail.enviar({
+    enviarEmail.enviar({
         usuario,
         subject: 'Password Reset',
         resetUrl,
@@ -65,7 +65,7 @@ exports.enviarToken = async (req, res) => {
     });
 
     //Terminar la ejecucíon
-    req.flash('correcto', 'Se envió el enlace a tu correo');
+    req.flash('correcto', 'El enlace se envió a tu correo');
     res.redirect('/iniciar-sesion');
 }
 

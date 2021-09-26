@@ -7,6 +7,15 @@ exports.formCrearCuenta = (req, res) => {
     });
 }
 
+exports.formIniciarSesion = (req, res) => {
+    // console.log(res.locals.mensajes);
+    const {error} = res.locals.mensajes;
+    res.render('iniciarSesion', {
+        nombrePagina: 'Iniciar sesión en Uptask',
+        error
+    });
+}
+
 exports.crearCuenta = async (req, res) => {
     //Leer los datos del formulario
     const {email, password} = req.body;

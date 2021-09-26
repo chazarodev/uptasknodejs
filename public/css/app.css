@@ -251,6 +251,7 @@ body.index {
 }
 .error p {
     color: red!important;
+    font-size: 10px;
 }
 .correcto {
     color: green;

@@ -81,6 +81,12 @@ module.exports = function() {
     //cerrar sesión
     router.get('/cerrar-sesion', authController.cerrarSesion);
 
+    //Reestablecer contrasenia
+    router.get('/reestablecer', usuariosController.formReestablecerPassword);
+    router.post('/reestablecer', authController.enviarToken);
+    router.get('/reestablecer/:token', authController.validarToken);
+    router.post('/reestablecer/:token', authController.actualizarPassword);
+
     return router;
 
     //Nota: app.use es reemplazado por router.verbo
